@@ -2,7 +2,7 @@
 Установил PG 17.4
 Залил перевозки
 Выполнил SELECT
-
+```
 postgres@szvm:~$ pg_lsclusters 
 Ver Cluster Port Status Owner    Data directory              Log file
 17  main    5432 online postgres /var/lib/postgresql/17/main /var/log/postgresql/postgresql-17-main.log
@@ -31,3 +31,4 @@ thai=# select count(*) from book.tickets;
 (1 row)
 
 thai=# 
+```
