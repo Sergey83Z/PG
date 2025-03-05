@@ -1,7 +1,11 @@
 Развернул VM на VirtualBox, установил Ubuntu
+
 Установил PG 17.4
+
 Залил перевозки
+
 Выполнил SELECT
+
 ```
 postgres@szvm:~$ pg_lsclusters 
 Ver Cluster Port Status Owner    Data directory              Log file
