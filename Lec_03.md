@@ -1,5 +1,5 @@
 --1. Создать таблицу с текстовым полем и заполнить случайными или сгенерированными данным в размере 1 млн строк
-```SQL
+
 DROP TABLE IF EXISTS free_text;
 CREATE TABLE IF NOT EXISTS free_text(info text); 
 --заполняем произвольным символом от a до z
@@ -8,12 +8,10 @@ SELECT
   chr(trunc(random() * 26 + 97)::integer) 
 FROM 
   generate_series(1,1e6) AS g(i);
-```
+
 
 --2. Посмотреть размер файла с таблицей
-```SQL
 SELECT pg_total_relation_size('free_text');
-```
 --36290560
 --здесь и далее TOAST нас не интересует, тк строки слишком короткие
 
