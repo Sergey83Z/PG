@@ -18,7 +18,6 @@ SELECT pg_total_relation_size('free_text');
 
 
 --3. 5 раз обновить все строчки и добавить к каждой строчке любой символ
-```SQL
 BEGIN;
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
@@ -26,12 +25,9 @@ UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 END;
-```
 
 --4. Посмотреть количество мертвых строчек в таблице и когда последний раз приходил автовакуум
-```SQL
 SELECT relname, n_dead_tup, n_live_tup, last_autovacuum FROM pg_stat_user_tables WHERE relname = 'free_text';
-```
 /*
 relname        |free_text|
 n_dead_tup     |5000000  |
@@ -40,9 +36,7 @@ last_autovacuum|         |
 */
 
 --5. Подождать некоторое время, проверяя, пришел ли автовакуум
-```SQL
 SELECT relname, n_dead_tup, n_live_tup, last_autovacuum FROM pg_stat_user_tables WHERE relname = 'free_text';
-```
 /*
 relname        |free_text                    |
 n_dead_tup     |0                            |
@@ -51,7 +45,6 @@ last_autovacuum|2025-03-13 09:06:54.589 +0300|
 */
 
 --6. 5 раз обновить все строчки и добавить к каждой строчке любой символ
-```SQL
 BEGIN;
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
@@ -59,22 +52,16 @@ UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 UPDATE free_text SET info = info || chr(trunc(random() * 26 + 97)::integer);
 END;
-```
 
 --7. Посмотреть размер файла с таблицей
-```SQL
 SELECT pg_total_relation_size('free_text');
-```
 --249724928
 
 --8. Отключить Автовакуум на конкретной таблице
-```SQL
 ALTER TABLE free_text SET (autovacuum_enabled=OFF);
-```
 
 
 --9. 10 раз обновить все строчки и добавить к каждой строчке любой символ
-```SQL
 UPDATE free_text SET info = info || 'a';
 UPDATE free_text SET info = info || 'b';
 UPDATE free_text SET info = info || 'c';
@@ -85,12 +72,9 @@ UPDATE free_text SET info = info || 'b';
 UPDATE free_text SET info = info || 'c';
 UPDATE free_text SET info = info || 'd';
 UPDATE free_text SET info = info || 'e';
-```
 
 --10. Посмотреть размер файла с таблицей
-```SQL
 SELECT pg_total_relation_size('free_text');
-```
 --740032512
 
 
@@ -104,9 +88,7 @@ SELECT pg_total_relation_size('free_text');
 Общий вывод: при работающем автовакууме (особенно при агрессивных настройках), место занимаемое таблицей может быть переиспользовано, при отключенном - нет
 
 --12. Не забудьте включить автовакуум
-```SQL
 ALTER TABLE free_text SET (autovacuum_enabled=ON);
-```
 
 
 --Задание со *:
@@ -116,7 +98,6 @@ DROP TABLE IF EXISTS free_text;
 CREATE TABLE IF NOT EXISTS free_text(info text); 
 INSERT INTO free_text(info) SELECT chr(trunc(random() * 26 + 97)::integer) FROM generate_series(1,1e5) AS g(i);
 
-```SQL
 DO 
 $$
 DECLARE 
@@ -139,8 +120,6 @@ BEGIN
 	RAISE NOTICE '% total_time = %',clock_timestamp(),clock_timestamp() - execution_ts;	
     RAISE NOTICE '----';
 END $$;
-```
-```
 /*
 ----
 2025-03-13 09:33:47.81873+03step_count = 10 is_commit_on_every_step = t
@@ -156,4 +135,4 @@ END $$;
 2025-03-13 09:33:52.448419+03 step = 10
 2025-03-13 09:33:52.448701+03 total_time = 00:00:04.630013
 ----*/
-```
+
