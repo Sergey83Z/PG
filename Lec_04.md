@@ -86,7 +86,5 @@ postgres@szvm:/home/sergey/Desktop$ tail /var/log/postgresql/postgresql-17-main.
 				id = rs.id"
 	PL/pgSQL function sp_deadlock(integer,boolean) line 9 at SQL statement
 2025-03-17 14:49:37.362 MSK [8379] postgres@postgres STATEMENT:  CALL sp_deadlock(2,true);
-2025-03-17 14:50:13.229 MSK [1153] LOG:  checkpoint starting: time
-2025-03-17 14:50:16.385 MSK [1153] LOG:  checkpoint complete: wrote 32 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.120 s, sync=0.027 s, total=3.156 s; sync files=27, longest=0.005 s, average=0.001 s; distance=126 kB, estimate=126 kB; lsn=0/1EE450F8, redo lsn=0/1EE450A0
 
 
